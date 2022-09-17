@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizSite.Contracts", "QuizSite.Contracts\QuizSite.Contracts.csproj", "{DF76297C-2479-4F48-BCAC-B2CC2AB1D106}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizSite.Domain", "QuizSite.Domain\QuizSite.Domain.csproj", "{0965FD25-977F-4A5B-8778-2C0546C61B7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizSite.UnitTests", "QuizSite.UnitTests\QuizSite.UnitTests.csproj", "{98E24D21-8025-4FFE-93B2-E67EBBA19193}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,19 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF76297C-2479-4F48-BCAC-B2CC2AB1D106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF76297C-2479-4F48-BCAC-B2CC2AB1D106}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF76297C-2479-4F48-BCAC-B2CC2AB1D106}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF76297C-2479-4F48-BCAC-B2CC2AB1D106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0965FD25-977F-4A5B-8778-2C0546C61B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0965FD25-977F-4A5B-8778-2C0546C61B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0965FD25-977F-4A5B-8778-2C0546C61B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0965FD25-977F-4A5B-8778-2C0546C61B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E24D21-8025-4FFE-93B2-E67EBBA19193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E24D21-8025-4FFE-93B2-E67EBBA19193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E24D21-8025-4FFE-93B2-E67EBBA19193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E24D21-8025-4FFE-93B2-E67EBBA19193}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
