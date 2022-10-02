@@ -3,7 +3,7 @@ using QuizSite.Contracts.Database;
 
 namespace QuizSite.Domain.Database;
 
-class QuizDbContext : DbContext
+public class QuizDbContext : DbContext
 {
     public DbSet<Question> Questions { get; init; }
     public DbSet<Choise> Choises { get; init; }

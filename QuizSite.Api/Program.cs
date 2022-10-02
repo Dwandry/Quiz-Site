@@ -1,27 +1,23 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using QuizSite.Domain.Database;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+internal class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllers();
+        builder.Services.AddDbContext<QuizDbContext>((options) => _ = options.UseNpgsql("User ID=postgres;Password=12345;Host=localhost;Port=5432;Database=FinalQuiz;"));
+
+        var app = builder.Build();
+
+        app.UseFileServer();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseFileServer();
-
-app.MapControllers();
-
-app.Run();
