@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace QuizSite.Api.Controllers;
 
-class QuizController : ControllerBase
+public class QuizController : ControllerBase
 {
     private readonly QuizDbContext _dbContext;
 
