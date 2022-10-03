@@ -10,4 +10,13 @@ public class QuizDbContext : DbContext
 
     public QuizDbContext() : base() {}
     public QuizDbContext(DbContextOptions<QuizDbContext> options) : base(options) {}
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder) 
+    {
+        modelBuilder.Entity<Choise>()
+            .HasOne<Question>(x => x.Question)
+            .WithMany(x => x.Choises);
+
+        base.OnModelCreating(modelBuilder);
+    }
 }

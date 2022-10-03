@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuizSite.Domain.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using QuizSite.Domain;
 
 namespace QuizSite.Api.Controllers;
 
@@ -15,9 +16,9 @@ public class QuizController : ControllerBase
     }
 
     [HttpGet("get-all-quizes")]
-    public async Task<IActionResult> getAllQuizes() {
-        var quizes = await _dbContext.Questions.ToArrayAsync();
-        System.Console.WriteLine(quizes);
+    public async Task<IActionResult> getAllQuizes([FromQuery(Name = "category")] string category) {
+        System.Console.WriteLine("category " + category);
+        var quizes = Factory.QuizService.getQuestionsBasedOnCategory(category);
         return Ok(quizes);
     }
 }

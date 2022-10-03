@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace QuizSite.Contracts.Database;
 
@@ -20,4 +21,6 @@ public class Question
     [Column("quiz_question")]
     [MaxLength(500)]
     public string QuizQuestion { get; set; }
+
+    public virtual IEnumerable<Choise> Choises { get; set; }
 }

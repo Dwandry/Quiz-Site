@@ -10,11 +10,11 @@ public class Choise
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("id")]
     public int Id { get; set; }
-    
+
     [Required]
-    [Column("quiz_question")]
+    [Column("answer_choise")]
     [MaxLength(500)]
-    public string QuizQuestion { get; set; }
+    public string AnswerChoise { get; set; }
 
     [Required]
     [Column("is_right_answer")]
@@ -23,6 +23,6 @@ public class Choise
 
     [Column("question_id")]
     public int QuestionId { get; set; }
-    
+
     public Question Question { get; set; }
 }
