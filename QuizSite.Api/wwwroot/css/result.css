@@ -1,0 +1,39 @@
+html {
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+  }
+  
+  thead th,
+  tfoot th {
+    font-family: "Rock Salt", cursive;
+    text-shadow: 1px 1px 1px black;
+    border: 3px solid rgb(0, 0, 0);
+    text-align: center;
+  }
+  
+  th {
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px black;
+    border: 3px solid rgb(0, 0, 0);
+    text-align: center;
+  }
+  
+  td {
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 1px black;
+    border: 3px solid rgb(0, 0, 0);
+    text-align: center;
+  }
+  
+  tbody td {
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    border: 3px solid rgb(0, 0, 0);
+    text-align: center;
+  }
+  
+  tfoot th {
+    text-align: right;
+    text-shadow: 1px 1px 1px black;
+    border: 3px solid rgb(0, 0, 0);
+    text-align: center;
+  }

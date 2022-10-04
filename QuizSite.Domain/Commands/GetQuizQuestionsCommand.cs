@@ -32,7 +32,7 @@ public class GetQuizQuestionsCommandHandler : IRequestHandler<GetQuizQuestionsCo
 
     public async Task<GetQuizQuestionsCommandResult> Handle(GetQuizQuestionsCommand request, CancellationToken cancellationToken)
     {
-        var questions = await _dbContext.Questions.Include(x => x.Choises).ToListAsync();
+        var questions = await _dbContext.Questions.Include(x => x.Choises).ToListAsync(cancellationToken);
         System.Console.WriteLine(questions);
         var questionsWithCategory = questions.Where(x => x.QuizCategory == request.Category).ToList();
         return new GetQuizQuestionsCommandResult

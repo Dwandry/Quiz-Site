@@ -19,7 +19,8 @@ public class QuizController : ControllerBase
     }
 
     [HttpGet("get-all-quizes")]
-    public async Task<IActionResult> getAllQuizes([FromQuery(Name = "category")] string category, CancellationToken cancellationToken) {
+    public async Task<IActionResult> GetAllQuizes([FromQuery(Name = "category")] string category, CancellationToken cancellationToken) 
+    {
         var command = new GetQuizQuestionsCommand
         {
             Category = category
