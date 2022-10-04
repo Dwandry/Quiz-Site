@@ -3,6 +3,7 @@ function goToQuiz(quizType) {
 }
 
 let buttons = document.getElementsByTagName('button');
+
 for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];   
     button.addEventListener('click', () => {
