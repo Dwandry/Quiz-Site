@@ -3,22 +3,30 @@ using QuizSite.Domain.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using QuizSite.Domain;
+using MediatR;
+using QuizSite.Domain.Queries;
+using System.Threading;
+using QuizSite.Domain.Commands;
 
 namespace QuizSite.Api.Controllers;
 
 public class QuizController : ControllerBase
 {
-    private readonly QuizDbContext _dbContext;
+    private readonly IMediator _mediator;
 
-    public QuizController(QuizDbContext dbContext)
+    public QuizController(IMediator mediator)
     {
-        _dbContext = dbContext;
+        _mediator = mediator;
     }
 
     [HttpGet("get-all-quizes")]
-    public async Task<IActionResult> getAllQuizes([FromQuery(Name = "category")] string category) {
-        System.Console.WriteLine("category " + category);
-        var quizes = Factory.QuizService.getQuestionsBasedOnCategory(category);
-        return Ok(quizes);
+    public async Task<IActionResult> getAllQuizes([FromQuery(Name = "category")] string category, CancellationToken cancellationToken) {
+        var command = new GetQuizQuestionsCommand
+        {
+            Category = category
+        };
+        var result = await _mediator.Send(command, cancellationToken);
+
+        return Ok(result.Questions);
     }
 }

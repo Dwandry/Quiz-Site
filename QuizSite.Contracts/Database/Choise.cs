@@ -18,7 +18,6 @@ public class Choise
 
     [Required]
     [Column("is_right_answer")]
-    [MaxLength(255)]
     public bool IsRightAnswer { get; set; }
 
     [Column("question_id")]
