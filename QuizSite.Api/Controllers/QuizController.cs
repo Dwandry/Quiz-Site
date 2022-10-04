@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using QuizSite.Domain;
 using MediatR;
-using QuizSite.Domain.Queries;
 using System.Threading;
 using QuizSite.Domain.Commands;
 

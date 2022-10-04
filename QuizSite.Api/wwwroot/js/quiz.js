@@ -16,8 +16,9 @@ function answerQuestion(event) {
     scores++;
     console.log('Scores:' + scores);
   }
-  if (Number(button.value) < htmlQuestions.length) {
-    divMainContainer.replaceChildren(htmlQuestions[button.value]);
+
+  if (button.value < Number(htmlQuestions.length) - 1) {
+    divMainContainer.replaceChildren(htmlQuestions[Number(button.value) + 1]);
   } else {
     const quizResultsDiv = document.createElement('div');
     quizResultsDiv.innerText = `Congratulations! Your score is ${scores}/${htmlQuestions.length}`;
@@ -58,7 +59,7 @@ function getQuizes() {
           let choiseBtn = document.createElement('button');
           choiseBtn.textContent = choise.answerChoise;
           choiseBtn.name = choise.isRightAnswer;
-          choiseBtn.value = question.id;
+          choiseBtn.value = i;
           choiseBtn.addEventListener('click', answerQuestion);
           answersDiv.appendChild(choiseBtn);
         }
