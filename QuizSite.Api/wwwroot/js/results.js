@@ -37,9 +37,9 @@ function getResults() {
     .then((data) => {
       console.log(data);
       if (data.results.length === 0) {
-        const notFoundDiv = document.createElement("div");
-        notFoundDiv.innerText = `No Results for User "${usernameFromInput}"`;
-        mainContainer.replaceChildren(notFoundDiv);
+        const notFoundP = document.createElement("p");
+        notFoundP.innerText = `No Results for User "${usernameFromInput}"`;
+        mainContainer.replaceChildren(notFoundP);
       } else {
         tableCreate(data.results);
       }
