@@ -16,16 +16,15 @@ function tableCreate(data) {
   });
   const tableBody = table.createTBody();
 
-  
-    for (let element of data) {
-      let row = table.insertRow();
-      for (key in element) {
-        let cell = row.insertCell();
-        let text = document.createTextNode(element[key]);
-        cell.appendChild(text);
-      }
+  for (let element of data) {
+    let row = table.insertRow();
+    for (key in element) {
+      let cell = row.insertCell();
+      let text = document.createTextNode(element[key]);
+      cell.appendChild(text);
     }
-  
+  }
+
   mainContainer.replaceChildren(table);
 }
 
@@ -41,6 +40,12 @@ function getResults() {
         notFoundP.innerText = `No Results for User "${usernameFromInput}"`;
         mainContainer.replaceChildren(notFoundP);
       } else {
+        for (let i = 0; i < data.results.length; i++) {
+          const result = data.results[i];
+          let date = new Date(result.dateOfQuizRun);
+          result.dateOfQuizRun  = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`;
+        }
+
         tableCreate(data.results);
       }
       const returnButton = document.createElement("button");
