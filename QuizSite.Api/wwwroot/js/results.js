@@ -16,7 +16,7 @@ function tableCreate(data) {
   });
   const tableBody = table.createTBody();
 
-  for (let element of data) {
+  
     for (let element of data) {
       let row = table.insertRow();
       for (key in element) {
@@ -25,8 +25,7 @@ function tableCreate(data) {
         cell.appendChild(text);
       }
     }
-  }
-
+  
   mainContainer.replaceChildren(table);
 }
 
@@ -38,6 +37,7 @@ function getResults() {
       console.log(data);
       if (data.results.length === 0) {
         const notFoundP = document.createElement("p");
+        notFoundP.style.marginTop = "200px";
         notFoundP.innerText = `No Results for User "${usernameFromInput}"`;
         mainContainer.replaceChildren(notFoundP);
       } else {
@@ -48,6 +48,10 @@ function getResults() {
       returnButton.addEventListener("click", () => {
         window.location.href = "/index.html";
       });
+      if (data.results.length !== 0) {
+        returnButton.style.width = "150px";
+        returnButton.style.fontSize = "12px";
+      }
       mainContainer.appendChild(returnButton);
     });
 }

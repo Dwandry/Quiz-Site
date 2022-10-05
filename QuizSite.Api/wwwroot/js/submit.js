@@ -20,15 +20,15 @@ submitBtn.addEventListener("click", () => {
   }).then((response) => {
     console.log("response", response.json());
 
-    const newDiv = document.createElement("div");
-    newDiv.innerText = "Result Successfully Submited!";
+    const newP = document.createElement("p");
+    newP.innerText = "Result Successfully Submited!";
 
     const returnBtn = document.createElement("button");
     returnBtn.textContent = "Return to Main Page";
     returnBtn.addEventListener("click", () => {
         window.location.href = "/index.html";
     });
-    newDiv.appendChild(returnBtn);
-    mainContainer.replaceChildren(newDiv);
+    newP.appendChild(returnBtn);
+    mainContainer.replaceChildren(newP);
   });
 });
