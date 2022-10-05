@@ -28,7 +28,9 @@ function answerQuestion(event) {
     divMainContainer.replaceChildren(htmlQuestions[Number(button.value) + 1]);
   } else {
     const quizResultsDiv = document.createElement("div");
-    quizResultsDiv.innerText = `Congratulations! Your score is ${scores}/${htmlQuestions.length}`;
+    const resultP = document.createElement("p");
+    resultP.innerText = `Congratulations! Your score is ${scores}/${htmlQuestions.length}`;
+    quizResultsDiv.appendChild(resultP);
 
     const returnBtn = createButton("/index.html", "Return to Main Page");
 
@@ -53,7 +55,9 @@ function getQuizes() {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];
         const questionDiv = document.createElement("div");
-        questionDiv.innerText = question.quizQuestion;
+        const questionP = document.createElement("p");
+        questionP.innerText = question.quizQuestion;
+        questionDiv.appendChild(questionP);
 
         const answersDiv = document.createElement("div");
 
@@ -69,6 +73,7 @@ function getQuizes() {
           answersDiv.appendChild(choiseBtn);
         }
 
+        questionDiv.className = "border01";
         questionDiv.appendChild(answersDiv);
         htmlQuestions.push(questionDiv);
       }
