@@ -38,13 +38,11 @@ public class GetUserResultsCommandHandler : IRequestHandler<GetUserResultsComman
         var result = await _dbContext.Results.ToListAsync();
         var userResults = result.Where(x => x.Username == request.Username).ToList();
         List<HttpResult> httpResults = new List<HttpResult>();
-        System.Console.WriteLine(userResults.Count);
         foreach (var userResult in userResults)
         {
             HttpResult httpResult = _mapper.Map<HttpResult>(userResult);
             httpResults.Add(httpResult);
         }
-        System.Console.WriteLine(httpResults.Count);
         return new GetUserResultsCommandResult
         {
             Results = httpResults.OrderBy(x=> x.DateOfQuizRun).ToList()
