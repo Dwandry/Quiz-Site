@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using QuizSite.Domain.Database;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using QuizSite.Domain;
 using MediatR;
 using System.Threading;
-using QuizSite.Domain.Commands;
+using QuizSite.Domain.Queries;
 
 namespace QuizSite.Api.Controllers;
 
@@ -21,7 +18,7 @@ public class QuizController : ControllerBase
     [HttpGet("get-all-quizes")]
     public async Task<IActionResult> GetAllQuizes([FromQuery(Name = "category")] string category, CancellationToken cancellationToken) 
     {
-        var command = new GetQuizQuestionsCommand
+        var command = new GetQuizQuestionsQuery
         {
             Category = category
         };

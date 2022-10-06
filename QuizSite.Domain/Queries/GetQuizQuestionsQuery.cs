@@ -9,33 +9,32 @@ using Microsoft.EntityFrameworkCore;
 using QuizSite.Contracts.Database;
 using QuizSite.Domain.Database;
 
-namespace QuizSite.Domain.Commands;
+namespace QuizSite.Domain.Queries;
 
-public class GetQuizQuestionsCommand : IRequest<GetQuizQuestionsCommandResult>
+public class GetQuizQuestionsQuery : IRequest<GetQuizQuestionsQueryResult>
 {
     public string Category { get; init; }
 }
 
-public class GetQuizQuestionsCommandResult
+public class GetQuizQuestionsQueryResult
 {
     public List<Question> Questions { get; init; }
 }
 
-public class GetQuizQuestionsCommandHandler : IRequestHandler<GetQuizQuestionsCommand, GetQuizQuestionsCommandResult>
+public class GetQuizQuestionsQueryHandler : IRequestHandler<GetQuizQuestionsQuery, GetQuizQuestionsQueryResult>
 {
     private readonly QuizDbContext _dbContext;
 
-    public GetQuizQuestionsCommandHandler(QuizDbContext dbContext)
+    public GetQuizQuestionsQueryHandler(QuizDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<GetQuizQuestionsCommandResult> Handle(GetQuizQuestionsCommand request, CancellationToken cancellationToken)
+    public async Task<GetQuizQuestionsQueryResult> Handle(GetQuizQuestionsQuery request, CancellationToken cancellationToken)
     {
         var questions = await _dbContext.Questions.Include(x => x.Choises).ToListAsync(cancellationToken);
-        System.Console.WriteLine(questions);
         var questionsWithCategory = questions.Where(x => x.QuizCategory == request.Category).ToList();
-        return new GetQuizQuestionsCommandResult
+        return new GetQuizQuestionsQueryResult
         {
             Questions = questionsWithCategory
         };

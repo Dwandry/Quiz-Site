@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using QuizSite.Domain.Database;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using QuizSite.Domain;
 using MediatR;
 using System.Threading;
 using QuizSite.Domain.Commands;
 using QuizSite.Contracts.Database;
+using QuizSite.Domain.Queries;
 
 namespace QuizSite.Api.Controllers;
 
@@ -35,7 +33,7 @@ public class ResultController : ControllerBase
     [HttpGet("see-results")]
     public async Task<IActionResult> GetUserResults([FromQuery]string username, CancellationToken cancellationToken) 
     {
-        var command = new GetUserResultsCommand
+        var command = new GetUserResultsQuery
         {
             Username = username
         };
