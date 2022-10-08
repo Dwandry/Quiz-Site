@@ -17,21 +17,21 @@ using Shouldly;
 
 namespace QuizSite.UnitTests.Queries;
 
-public class GetQuizQuestionsQueryTest
+public class GetUserResultsQueryTest
 {
     private readonly Mock<IQuizSiteService> _quizService;
-    private readonly IRequestHandler<GetQuizQuestionsQuery, GetQuizQuestionsQueryResult> _handler;
+    private readonly IRequestHandler<GetUserResultsQuery, GetUserResultsQueryResult> _handler;
     private readonly IMapper _mapper;
 
-    public GetQuizQuestionsQueryTest()
+    public GetUserResultsQueryTest()
     {
         _quizService = new Mock<IQuizSiteService>();
         _mapper = CreateMapperForTest();
-        _handler = new GetQuizQuestionsQueryHandler(_mapper, _quizService.Object);        
+        _handler = new GetUserResultsQueryHandler(_mapper, _quizService.Object);        
     }
 
     [Fact]
-    public async Task QuizQuestionsShouldBeFound()
+    public async Task UserResultsShouldBeFound()
     {
         //Arrange
         var fixture = new Fixture();
@@ -39,23 +39,27 @@ public class GetQuizQuestionsQueryTest
             .ForEach(b => fixture.Behaviors.Remove(b));
         fixture.Behaviors.Add(new OmitOnRecursionBehavior());
 
-        var listOfQuestions = fixture.CreateMany<Question>(5).ToList();
+        var listOfUserResults = fixture.CreateMany<Result>(10)
+            .OrderByDescending(x => x.DateOfQuizRun)
+            .ToList();
 
-        _quizService.Setup(x => x.getQuizQuestionsByCategory(It.IsAny<GetQuizQuestionsQuery>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.FromResult(listOfQuestions));
+        _quizService.Setup(x => x.getUserResultsByName(It.IsAny<GetUserResultsQuery>(), It.IsAny<CancellationToken>()))
+            .Returns(Task.FromResult(listOfUserResults));
 
-        var query = new GetQuizQuestionsQuery
+        
+        var query = new GetUserResultsQuery
         {
-            Category = listOfQuestions[0].QuizCategory
+            Username = listOfUserResults[0].Username
         };
-
         //Act
         var result = await _handler.Handle(query, CancellationToken.None);
 
         //Assert
         result.ShouldNotBeNull();
-        result.Questions[0].QuizCategory.ShouldBe(listOfQuestions[0].QuizCategory);
-        result.Questions[0].QuizQuestion.ShouldBe(listOfQuestions[0].QuizQuestion);
+        result.Results[0].DateOfQuizRun.ShouldBe(listOfUserResults[0].DateOfQuizRun);
+        result.Results[0].QuizCategory.ShouldBe(listOfUserResults[0].QuizCategory);
+        result.Results[0].Username.ShouldBe(listOfUserResults[0].Username);
+        result.Results[0].Score.ShouldBe(listOfUserResults[0].Score);
     }
 
     private IMapper CreateMapperForTest()
