@@ -34,12 +34,18 @@ public class GetUserResultsQueryHandler : IRequestHandler<GetUserResultsQuery, G
 
     public async Task<GetUserResultsQueryResult> Handle(GetUserResultsQuery request, CancellationToken cancellationToken)
     {
-        var result = await _dbContext.Results.ToListAsync();
-        var userResults = result.Where(x => x.Username == request.Username).ToList();
-        var httpResults = userResults.Select(x => _mapper.Map<HttpResult>(x)).ToList();
+        var result = await _dbContext.Results
+            .Where(x => x.Username == request.Username)
+            .ToListAsync(cancellationToken);
+
+        var httpResults = result
+            .Select(x => _mapper.Map<HttpResult>(x))
+            .OrderByDescending(x => x.DateOfQuizRun)
+            .ToList();
+
         return new GetUserResultsQueryResult
         {
-            Results = httpResults.OrderByDescending(x=> x.DateOfQuizRun).ToList()
+            Results = httpResults
         };
     }
 }

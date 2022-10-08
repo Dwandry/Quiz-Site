@@ -7,5 +7,6 @@ public class AppMappingProfile : Profile
 		public AppMappingProfile()
 		{			
 			CreateMap<Result, HttpResult>();
+			CreateMap<Question, HttpQuestion>();
 		}
 }
