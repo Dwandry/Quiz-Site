@@ -23,12 +23,10 @@ public class SubmitQuizResultCommandResult
 
 public class SubmitQuizResultCommandHandler : IRequestHandler<SubmitQuizResultCommand, SubmitQuizResultCommandResult>
 {
-    private readonly QuizDbContext _dbContext;
     private readonly IQuizSiteService _quizService;
 
-    public SubmitQuizResultCommandHandler(QuizDbContext dbContext, IQuizSiteService quizService)
+    public SubmitQuizResultCommandHandler(IQuizSiteService quizService)
     {
-        _dbContext = dbContext;
         _quizService = quizService;
     }
 

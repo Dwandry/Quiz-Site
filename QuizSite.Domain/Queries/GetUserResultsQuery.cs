@@ -24,14 +24,12 @@ public class GetUserResultsQueryResult
 
 public class GetUserResultsQueryHandler : IRequestHandler<GetUserResultsQuery, GetUserResultsQueryResult>
 {
-    private readonly QuizDbContext _dbContext;
     private readonly IMapper _mapper;
     private readonly IQuizSiteService _quizService;
 
 
-    public GetUserResultsQueryHandler(QuizDbContext dbContext, IMapper mapper, IQuizSiteService quizService)
+    public GetUserResultsQueryHandler(IMapper mapper, IQuizSiteService quizService)
     {
-        _dbContext = dbContext;
         _mapper = mapper;
         _quizService = quizService;
     }

@@ -25,14 +25,12 @@ public class GetQuizQuestionsQueryResult
 
 public class GetQuizQuestionsQueryHandler : IRequestHandler<GetQuizQuestionsQuery, GetQuizQuestionsQueryResult>
 {
-    private readonly QuizDbContext _dbContext;
     private readonly IMapper _mapper;
     private readonly IQuizSiteService _quizService;
 
 
-    public GetQuizQuestionsQueryHandler(QuizDbContext dbContext, IMapper mapper, IQuizSiteService quizService)
+    public GetQuizQuestionsQueryHandler(IMapper mapper, IQuizSiteService quizService)
     {
-        _dbContext = dbContext;
         _mapper = mapper;
         _quizService = quizService;
     }
