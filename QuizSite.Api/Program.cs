@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using QuizSite.Domain.Queries;
 using QuizSite.Domain.Database;
 using MediatR;
+using QuizSite.Domain.Services.Interfaces;
+using QuizSite.Domain.Services;
 
 internal class Program
 {
@@ -17,6 +19,8 @@ internal class Program
         builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         builder.Services.AddMediatR(typeof(GetQuizQuestionsQuery));
         builder.Services.AddAutoMapper(typeof(AppMappingProfile));
+        builder.Services.AddTransient(typeof(IQuizSiteService), typeof(QuizSiteService));
+
         var app = builder.Build();
 
         app.UseFileServer();

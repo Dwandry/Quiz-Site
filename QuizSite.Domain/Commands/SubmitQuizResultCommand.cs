@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using QuizSite.Contracts.Database;
 using QuizSite.Domain.Database;
+using QuizSite.Domain.Services.Interfaces;
 
 namespace QuizSite.Domain.Commands;
 
@@ -23,15 +24,17 @@ public class SubmitQuizResultCommandResult
 public class SubmitQuizResultCommandHandler : IRequestHandler<SubmitQuizResultCommand, SubmitQuizResultCommandResult>
 {
     private readonly QuizDbContext _dbContext;
+    private readonly IQuizSiteService _quizService;
 
-    public SubmitQuizResultCommandHandler(QuizDbContext dbContext)
+    public SubmitQuizResultCommandHandler(QuizDbContext dbContext, IQuizSiteService quizService)
     {
         _dbContext = dbContext;
+        _quizService = quizService;
     }
 
     public async Task<SubmitQuizResultCommandResult> Handle(SubmitQuizResultCommand request, CancellationToken cancellationToken)
     {
-        var resultToSubmit = new Result
+        var resultToInsert = new Result
         {
             Score = request.Score,
             Username = request.Username,
@@ -39,12 +42,9 @@ public class SubmitQuizResultCommandHandler : IRequestHandler<SubmitQuizResultCo
             DateOfQuizRun = DateTime.UtcNow
         };
 
-        var result = await _dbContext.Results.AddAsync(resultToSubmit, cancellationToken);
-        await _dbContext.SaveChangesAsync(cancellationToken);
-
         return new SubmitQuizResultCommandResult
         {
-            Id = result.Entity.Id
+            Id = await _quizService.insertUserResultIntoDb(resultToInsert, cancellationToken)
         };
     }
 }

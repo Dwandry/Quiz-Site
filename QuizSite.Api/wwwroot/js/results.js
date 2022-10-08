@@ -43,7 +43,10 @@ function getResults() {
         for (let i = 0; i < data.results.length; i++) {
           const result = data.results[i];
           let date = new Date(result.dateOfQuizRun);
-          result.dateOfQuizRun  = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}`;
+          console.log('date', date);
+          console.log('dateInit', result.dateOfQuizRun);
+          result.dateOfQuizRun  = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}; ${date.getHours()}:${date.getMinutes()}`;
+          console.log('finalDate', result.dateOfQuizRun);
         }
 
         tableCreate(data.results);

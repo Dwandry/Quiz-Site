@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using QuizSite.Contracts.Http;
 using QuizSite.Domain.Database;
+using QuizSite.Domain.Services.Interfaces;
 
 namespace QuizSite.Domain.Queries;
 
@@ -25,18 +26,19 @@ public class GetUserResultsQueryHandler : IRequestHandler<GetUserResultsQuery, G
 {
     private readonly QuizDbContext _dbContext;
     private readonly IMapper _mapper;
+    private readonly IQuizSiteService _quizService;
 
-    public GetUserResultsQueryHandler(QuizDbContext dbContext, IMapper mapper = null)
+
+    public GetUserResultsQueryHandler(QuizDbContext dbContext, IMapper mapper, IQuizSiteService quizService)
     {
         _dbContext = dbContext;
         _mapper = mapper;
+        _quizService = quizService;
     }
 
     public async Task<GetUserResultsQueryResult> Handle(GetUserResultsQuery request, CancellationToken cancellationToken)
     {
-        var result = await _dbContext.Results
-            .Where(x => x.Username == request.Username)
-            .ToListAsync(cancellationToken);
+        var result = await _quizService.getUserResultsByName(request, cancellationToken);
 
         var httpResults = result
             .Select(x => _mapper.Map<HttpResult>(x))

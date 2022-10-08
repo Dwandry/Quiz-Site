@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using QuizSite.Contracts.Database;
 using QuizSite.Contracts.Http;
 using QuizSite.Domain.Database;
+using QuizSite.Domain.Services.Interfaces;
 
 namespace QuizSite.Domain.Queries;
 
@@ -26,19 +27,19 @@ public class GetQuizQuestionsQueryHandler : IRequestHandler<GetQuizQuestionsQuer
 {
     private readonly QuizDbContext _dbContext;
     private readonly IMapper _mapper;
+    private readonly IQuizSiteService _quizService;
 
-    public GetQuizQuestionsQueryHandler(QuizDbContext dbContext, IMapper mapper)
+
+    public GetQuizQuestionsQueryHandler(QuizDbContext dbContext, IMapper mapper, IQuizSiteService quizService)
     {
         _dbContext = dbContext;
         _mapper = mapper;
+        _quizService = quizService;
     }
 
     public async Task<GetQuizQuestionsQueryResult> Handle(GetQuizQuestionsQuery request, CancellationToken cancellationToken)
     {
-        var questions = await _dbContext.Questions
-            .Include(x => x.Choises)
-            .Where(x => x.QuizCategory == request.Category)
-            .ToListAsync(cancellationToken);
+        var questions = await _quizService.getQuizQuestionsByCategory(request, cancellationToken);
 
         return new GetQuizQuestionsQueryResult
         {
