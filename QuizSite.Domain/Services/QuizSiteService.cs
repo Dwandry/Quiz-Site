@@ -19,7 +19,7 @@ public class QuizSiteService : IQuizSiteService
         _dbContext = dbContext;
     }
 
-    public async Task<List<Question>> getQuizQuestionsByCategory(GetQuizQuestionsQuery request, CancellationToken cancellationToken)
+    public async Task<List<Question>> GetQuizQuestionsByCategory(GetQuizQuestionsQuery request, CancellationToken cancellationToken)
     {
         return await _dbContext.Questions
             .Include(x => x.Choises)
@@ -27,7 +27,7 @@ public class QuizSiteService : IQuizSiteService
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<List<Result>> getUserResultsByName(GetUserResultsQuery request, CancellationToken cancellationToken)
+    public async Task<List<Result>> GetUserResultsByName(GetUserResultsQuery request, CancellationToken cancellationToken)
     {
         return  await _dbContext.Results
             .Where(x => x.Username == request.Username)
@@ -35,7 +35,7 @@ public class QuizSiteService : IQuizSiteService
 
     }
 
-    public async Task<int> insertUserResultIntoDb(Result resultToInsert, CancellationToken cancellationToken)
+    public async Task<int> InsertUserResultIntoDb(Result resultToInsert, CancellationToken cancellationToken)
     {
         var result = await _dbContext.Results.AddAsync(resultToInsert, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);

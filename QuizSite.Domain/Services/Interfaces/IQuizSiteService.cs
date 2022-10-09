@@ -8,9 +8,9 @@ namespace QuizSite.Domain.Services.Interfaces;
 
 public interface IQuizSiteService
 {
-    Task<List<Question>> getQuizQuestionsByCategory(GetQuizQuestionsQuery request, CancellationToken cancellationToken);
+    Task<List<Question>> GetQuizQuestionsByCategory(GetQuizQuestionsQuery request, CancellationToken cancellationToken);
 
-    Task<List<Result>> getUserResultsByName(GetUserResultsQuery request, CancellationToken cancellationToken);
+    Task<List<Result>> GetUserResultsByName(GetUserResultsQuery request, CancellationToken cancellationToken);
 
-    Task<int> insertUserResultIntoDb(Result resultToInsert, CancellationToken cancellationToken);
+    Task<int> InsertUserResultIntoDb(Result resultToInsert, CancellationToken cancellationToken);
 }

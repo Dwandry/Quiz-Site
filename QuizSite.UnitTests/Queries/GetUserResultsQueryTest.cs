@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +7,7 @@ using MediatR;
 using Moq;
 
 using QuizSite.Contracts.Database;
-using QuizSite.Domain.Database;
 using QuizSite.Domain.Queries;
-using QuizSite.Domain.Services;
 using QuizSite.Domain.Services.Interfaces;
 using Shouldly;
 
@@ -43,7 +39,7 @@ public class GetUserResultsQueryTest
             .OrderByDescending(x => x.DateOfQuizRun)
             .ToList();
 
-        _quizService.Setup(x => x.getUserResultsByName(It.IsAny<GetUserResultsQuery>(), It.IsAny<CancellationToken>()))
+        _quizService.Setup(x => x.GetUserResultsByName(It.IsAny<GetUserResultsQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(listOfUserResults));
 
         

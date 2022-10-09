@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 using MediatR;
 using QuizSite.Contracts.Database;
-using QuizSite.Domain.Database;
 using QuizSite.Domain.Services.Interfaces;
 
 namespace QuizSite.Domain.Commands;
@@ -42,7 +41,7 @@ public class SubmitQuizResultCommandHandler : IRequestHandler<SubmitQuizResultCo
 
         return new SubmitQuizResultCommandResult
         {
-            Id = await _quizService.insertUserResultIntoDb(resultToInsert, cancellationToken)
+            Id = await _quizService.InsertUserResultIntoDb(resultToInsert, cancellationToken)
         };
     }
 }

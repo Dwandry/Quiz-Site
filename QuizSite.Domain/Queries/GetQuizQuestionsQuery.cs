@@ -1,14 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using QuizSite.Contracts.Database;
 using QuizSite.Contracts.Http;
-using QuizSite.Domain.Database;
 using QuizSite.Domain.Services.Interfaces;
 
 namespace QuizSite.Domain.Queries;
@@ -37,7 +33,7 @@ public class GetQuizQuestionsQueryHandler : IRequestHandler<GetQuizQuestionsQuer
 
     public async Task<GetQuizQuestionsQueryResult> Handle(GetQuizQuestionsQuery request, CancellationToken cancellationToken)
     {
-        var questions = await _quizService.getQuizQuestionsByCategory(request, cancellationToken);
+        var questions = await _quizService.GetQuizQuestionsByCategory(request, cancellationToken);
 
         return new GetQuizQuestionsQueryResult
         {

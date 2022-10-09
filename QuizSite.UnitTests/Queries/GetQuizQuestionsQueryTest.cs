@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +7,7 @@ using MediatR;
 using Moq;
 
 using QuizSite.Contracts.Database;
-using QuizSite.Domain.Database;
 using QuizSite.Domain.Queries;
-using QuizSite.Domain.Services;
 using QuizSite.Domain.Services.Interfaces;
 using Shouldly;
 
@@ -41,7 +37,7 @@ public class GetQuizQuestionsQueryTest
 
         var listOfQuestions = fixture.CreateMany<Question>(5).ToList();
 
-        _quizService.Setup(x => x.getQuizQuestionsByCategory(It.IsAny<GetQuizQuestionsQuery>(), It.IsAny<CancellationToken>()))
+        _quizService.Setup(x => x.GetQuizQuestionsByCategory(It.IsAny<GetQuizQuestionsQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(listOfQuestions));
 
         var query = new GetQuizQuestionsQuery
