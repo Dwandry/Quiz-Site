@@ -37,6 +37,7 @@ function getResults() {
       if (data.results.length === 0) {
         const notFoundP = document.createElement("p");
         notFoundP.style.marginTop = "200px";
+        notFoundP.style.textAlign = "center";
         notFoundP.innerText = `No Results for User "${usernameFromInput}"`;
         mainContainer.replaceChildren(notFoundP);
       } else {
