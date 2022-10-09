@@ -54,6 +54,7 @@ public class GetQuizQuestionsQueryTest
 
         //Assert
         result.ShouldNotBeNull();
+        result.ShouldBeOfType<GetQuizQuestionsQueryResult>();
         result.Questions[0].QuizCategory.ShouldBe(listOfQuestions[0].QuizCategory);
         result.Questions[0].QuizQuestion.ShouldBe(listOfQuestions[0].QuizQuestion);
     }

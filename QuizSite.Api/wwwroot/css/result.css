@@ -149,6 +149,7 @@ p {
   margin-bottom: 15px;
   color: #666;
   font-size: 20px;
+  font-weight: 800;
 }
 
 label {
@@ -187,4 +188,14 @@ input:placeholder-shown + .form__label {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.mainContainerSubmit {
+  position: relative;
+  margin-top: 250px;
+}
+
+.pInSubmit {
+  margin-top: 200px;
+  text-align: center;
 }

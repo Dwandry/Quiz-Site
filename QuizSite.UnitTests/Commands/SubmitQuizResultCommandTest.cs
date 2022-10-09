@@ -50,5 +50,6 @@ public class SubmitQuizResultCommandTest
         //Assert
         result.ShouldNotBeNull();
         result.Id.ShouldBeInRange(10, 100);
+        result.ShouldBeOfType<SubmitQuizResultCommandResult>();
     }
 }

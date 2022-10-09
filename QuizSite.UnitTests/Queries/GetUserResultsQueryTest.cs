@@ -56,6 +56,7 @@ public class GetUserResultsQueryTest
 
         //Assert
         result.ShouldNotBeNull();
+        result.ShouldBeOfType<GetUserResultsQueryResult>();
         result.Results[0].DateOfQuizRun.ShouldBe(listOfUserResults[0].DateOfQuizRun);
         result.Results[0].QuizCategory.ShouldBe(listOfUserResults[0].QuizCategory);
         result.Results[0].Username.ShouldBe(listOfUserResults[0].Username);
